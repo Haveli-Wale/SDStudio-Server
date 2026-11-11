@@ -18,11 +18,11 @@ BEGIN
     BEGIN
         BLOCK "040904E4"
         BEGIN
-            VALUE "CompanyName",      TOSTRING(PROJECT_VENDOR)
-            VALUE "FileDescription",  TOSTRING(PROJECT_NAME)
+            VALUE "CompanyName",      "Shiv Digital Studio"
+            VALUE "FileDescription",  "Shiv Digital Studio Desktop Server"
             VALUE "FileVersion",      TOSTRING(PROJECT_VERSION)
-            VALUE "InternalName",     TOSTRING(PROJECT_NAME)
-            VALUE "ProductName",      TOSTRING(PROJECT_NAME)
+            VALUE "InternalName",     "SDStudio Server"
+            VALUE "ProductName",      "Shiv Digital Studio Desktop Server"
             VALUE "ProductVersion",   TOSTRING(PROJECT_VERSION)
             VALUE "LegalCopyright",   "https://raw.githubusercontent.com/SunshineStream/Sunshine/master/LICENSE"
         END

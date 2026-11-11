@@ -1,6 +1,6 @@
 @echo off
 
-set RULE_NAME=Sunshine
+set "RULE_NAME=SDStudio Server"
 
 rem Delete the rule
-netsh advfirewall firewall delete rule name=%RULE_NAME%
+netsh advfirewall firewall delete rule name="%RULE_NAME%"

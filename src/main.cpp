@@ -470,7 +470,7 @@ int main(int argc, char *argv[]) {
     BOOST_LOG(fatal) << "HTTP interface failed to initialize"sv;
 
 #ifdef _WIN32
-    BOOST_LOG(fatal) << "To relaunch Sunshine successfully, use the shortcut in the Start Menu. Do not run Sunshine.exe manually."sv;
+    BOOST_LOG(fatal) << "To relaunch SDStudio Server successfully, use the shortcut in the Start Menu. Do not run SDStudio Server.exe manually."sv;
     std::this_thread::sleep_for(10s);
 #endif
 

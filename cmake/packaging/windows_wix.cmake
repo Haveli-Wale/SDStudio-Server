@@ -57,13 +57,13 @@ endif()
 
 # Set WiX-specific variables
 set(CPACK_WIX_ROOT "${WIX_TOOL_PATH}")
-set(CPACK_WIX_UPGRADE_GUID "512A3D1B-BE16-401B-A0D1-59BBA3942FB8")
+set(CPACK_WIX_UPGRADE_GUID "349F90C1-B7E5-4E96-9252-6E0E533F6049")
 
 # Installer metadata
-set(CPACK_WIX_HELP_LINK "https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2getting__started.html")
+set(CPACK_WIX_HELP_LINK "https://github.com/Haveli-Wale/SDStudio-Server/issues")
 set(CPACK_WIX_PRODUCT_ICON "${SUNSHINE_ICON_PATH}")
 set(CPACK_WIX_PRODUCT_URL "${CMAKE_PROJECT_HOMEPAGE_URL}")
-set(CPACK_WIX_PROGRAM_MENU_FOLDER "LizardByte")
+set(CPACK_WIX_PROGRAM_MENU_FOLDER "Shiv Digital Studio")
 # Force package files to replace existing files when switching between release
 # and PR builds, regardless of their embedded file versions.
 # https://learn.microsoft.com/en-us/windows/win32/msi/reinstallmode

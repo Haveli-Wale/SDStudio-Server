@@ -228,7 +228,7 @@ function Invoke-SunshineIfExist {
         [string]$Emoji = "🔧"
     )
 
-    $SunshinePath = Join-Path $RootDir "sunshine.exe"
+    $SunshinePath = Join-Path $RootDir "SDStudio Server.exe"
     return Invoke-ExecutableIfExist `
         -ExecutablePath $SunshinePath `
         -Arguments $Arguments `

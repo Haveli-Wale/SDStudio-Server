@@ -1,5 +1,5 @@
-﻿# Sunshine Setup Script
-# This script orchestrates the installation and uninstallation of Sunshine
+﻿# SDStudio Server Setup Script
+# This script orchestrates the installation and uninstallation of SDStudio Server
 # Usage: sunshine-setup.ps1 -Action [install|uninstall] [-Silent]
 
 param(
@@ -15,7 +15,7 @@ param(
 )
 
 # Constants
-$DocsUrl = "https://docs.lizardbyte.dev/projects/sunshine"
+$DocsUrl = "https://github.com/Haveli-Wale/SDStudio-Server"
 
 # Set preference variables for output streams
 $InformationPreference = 'Continue'
@@ -204,11 +204,11 @@ function Write-LogFile {
 # If Action is not provided, prompt the user
 if (-not $Action) {
     Write-Information ""
-    Write-FramedText -Message "🔅 Sunshine Setup Script" -Level "Information" -Color "Cyan"
+    Write-FramedText -Message "🔅 SDStudio Server Setup" -Level "Information" -Color "Cyan"
     Write-Information ""
     Write-LogMessage -Message "Please select an action:" -Level "Information" -Color "Yellow"
-    Write-LogMessage -Message "  1. Install Sunshine" -Level "Information" -Color "Green"
-    Write-LogMessage -Message "  2. Uninstall Sunshine" -Level "Information" -Color "Red"
+    Write-LogMessage -Message "  1. Install SDStudio Server" -Level "Information" -Color "Green"
+    Write-LogMessage -Message "  2. Uninstall SDStudio Server" -Level "Information" -Color "Red"
     Write-Information ""
 
     $validChoice = $false
@@ -263,7 +263,7 @@ $RootDir = Split-Path -Parent $ScriptDir
 
 # Set up transcript logging
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-$logDir = Join-Path $env:TEMP "Sunshine\logs\$Action"
+$logDir = Join-Path $env:TEMP "SDStudio Server\logs\$Action"
 $LogPath = Join-Path $logDir "${timestamp}.log"
 
 # Ensure the log directory exists
@@ -281,7 +281,7 @@ Write-Information ""
 
 if ($Action -eq "install") {
     Write-FramedText `
-        -Message "🔅 Sunshine Installation Script" `
+        -Message "🔅 SDStudio Server Installation" `
         -Level "Information" `
         -Color "Yellow"
     Write-Information ""
@@ -292,7 +292,7 @@ if ($Action -eq "install") {
     # Reset permissions on the install directory
     $currentStep++
     Write-Progress `
-        -Activity "Installing Sunshine" `
+        -Activity "Installing SDStudio Server" `
         -Status "Resetting permissions on installation directory" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     Write-LogMessage -Message "🔐 Resetting permissions on installation directory" -Level "Step"
@@ -359,7 +359,7 @@ if ($Action -eq "install") {
     # 1. Update PATH (add)
     $currentStep++
     Write-Progress `
-        -Activity "Installing Sunshine" `
+        -Activity "Installing SDStudio Server" `
         -Status "Updating system PATH" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $updatePathScript = Join-Path $RootDir "scripts\update-path.bat"
@@ -373,7 +373,7 @@ if ($Action -eq "install") {
     # 2. Migrate configuration
     $currentStep++
     Write-Progress `
-        -Activity "Installing Sunshine" `
+        -Activity "Installing SDStudio Server" `
         -Status "Migrating configuration" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $migrateConfigScript = Join-Path $RootDir "scripts\migrate-config.bat"
@@ -386,7 +386,7 @@ if ($Action -eq "install") {
     # 3. Add firewall rules
     $currentStep++
     Write-Progress `
-        -Activity "Installing Sunshine" `
+        -Activity "Installing SDStudio Server" `
         -Status "Configuring firewall" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $addFirewallScript = Join-Path $RootDir "scripts\add-firewall-rule.bat"
@@ -399,7 +399,7 @@ if ($Action -eq "install") {
     # 4. Install service
     $currentStep++
     Write-Progress `
-        -Activity "Installing Sunshine" `
+        -Activity "Installing SDStudio Server" `
         -Status "Installing service" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $installServiceScript = Join-Path $RootDir "scripts\install-service.bat"
@@ -412,7 +412,7 @@ if ($Action -eq "install") {
     # 5. Configure autostart
     $currentStep++
     Write-Progress `
-        -Activity "Installing Sunshine" `
+        -Activity "Installing SDStudio Server" `
         -Status "Configuring autostart" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $autostartScript = Join-Path $RootDir "scripts\autostart-service.bat"
@@ -422,8 +422,8 @@ if ($Action -eq "install") {
         -Emoji "🚀"
     Write-Information ""
 
-    Write-Progress -Activity "Installing Sunshine" -Completed
-    Write-FramedText -Message "✓ Sunshine installation completed successfully!" -Level "Success"
+    Write-Progress -Activity "Installing SDStudio Server" -Completed
+    Write-FramedText -Message "✓ SDStudio Server installation completed successfully!" -Level "Success"
 
     # Open documentation in browser (only if not running silently)
     if (-not $Silent) {
@@ -443,7 +443,7 @@ if ($Action -eq "install") {
 
 } elseif ($Action -eq "uninstall") {
     Write-FramedText `
-        -Message "🗑️  Sunshine Uninstallation Script" `
+        -Message "🗑️  SDStudio Server Uninstallation" `
         -Level "Information" `
         -Color "Yellow"
     Write-Information ""
@@ -454,7 +454,7 @@ if ($Action -eq "install") {
     # 1. Delete firewall rules
     $currentStep++
     Write-Progress `
-        -Activity "Uninstalling Sunshine" `
+        -Activity "Uninstalling SDStudio Server" `
         -Status "Removing firewall rules" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $deleteFirewallScript = Join-Path $RootDir "scripts\delete-firewall-rule.bat"
@@ -467,7 +467,7 @@ if ($Action -eq "install") {
     # 2. Uninstall service
     $currentStep++
     Write-Progress `
-        -Activity "Uninstalling Sunshine" `
+        -Activity "Uninstalling SDStudio Server" `
         -Status "Uninstalling service" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $uninstallServiceScript = Join-Path $RootDir "scripts\uninstall-service.bat"
@@ -480,7 +480,7 @@ if ($Action -eq "install") {
     # 3. Restore NVIDIA preferences
     $currentStep++
     Write-Progress `
-        -Activity "Uninstalling Sunshine" `
+        -Activity "Uninstalling SDStudio Server" `
         -Status "Restoring NVIDIA settings" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     Invoke-SunshineIfExist `
@@ -492,7 +492,7 @@ if ($Action -eq "install") {
     # 4. Update PATH (remove)
     $currentStep++
     Write-Progress `
-        -Activity "Uninstalling Sunshine" `
+        -Activity "Uninstalling SDStudio Server" `
         -Status "Cleaning up system PATH" `
         -PercentComplete (($currentStep / $totalSteps) * 100)
     $updatePathScript = Join-Path $RootDir "scripts\update-path.bat"
@@ -503,9 +503,9 @@ if ($Action -eq "install") {
         -Emoji "📁"
     Write-Information ""
 
-    Write-Progress -Activity "Uninstalling Sunshine" -Completed
+    Write-Progress -Activity "Uninstalling SDStudio Server" -Completed
     Write-FramedText `
-        -Message "✓ Sunshine uninstallation completed successfully!" `
+        -Message "✓ SDStudio Server uninstallation completed successfully!" `
         -Level "Success"
 }
 

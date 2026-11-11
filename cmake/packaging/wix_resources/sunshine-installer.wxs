@@ -4,49 +4,49 @@
     <StandardDirectory Id="ProgramMenuFolder">
         <Component Id="ApplicationShortcutRoot" Guid="*">
             <Shortcut Id="ApplicationStartMenuShortcutRoot"
-                      Name="Sunshine"
-                      Description="Sunshine Game Stream Host"
-                      Target="[INSTALL_ROOT]sunshine.exe"
+                      Name="SDStudio Server"
+                      Description="Shiv Digital Studio Desktop Server"
+                      Target="[INSTALL_ROOT]SDStudio Server.exe"
                       Arguments="--shortcut"
                       WorkingDirectory="INSTALL_ROOT"/>
-            <RegistryValue Root="HKCU" Key="Software\LizardByte\Sunshine" Name="installed_root" Type="integer" Value="1" KeyPath="yes"/>
+            <RegistryValue Root="HKCU" Key="Software\Shiv Digital Studio\SDStudio Server" Name="installed_root" Type="integer" Value="1" KeyPath="yes"/>
         </Component>
-        <Directory Id="ProgramMenuSubfolder" Name="LizardByte">
-            <Directory Id="ProgramMenuSunshineFolder" Name="Sunshine">
+        <Directory Id="ProgramMenuSubfolder" Name="Shiv Digital Studio">
+            <Directory Id="ProgramMenuSunshineFolder" Name="SDStudio Server">
                 <Component Id="ApplicationShortcut" Guid="*">
                     <Shortcut Id="ApplicationStartMenuShortcut"
-                              Name="Sunshine"
-                              Description="Sunshine Game Stream Host"
-                              Target="[INSTALL_ROOT]sunshine.exe"
+                              Name="SDStudio Server"
+                              Description="Shiv Digital Studio Desktop Server"
+                              Target="[INSTALL_ROOT]SDStudio Server.exe"
                               Arguments="--shortcut"
                               WorkingDirectory="INSTALL_ROOT"/>
                     <RemoveFolder Id="CleanUpShortCut" Directory="ProgramMenuSunshineFolder" On="uninstall"/>
                     <RemoveFolder Id="CleanUpShortCutParent" Directory="ProgramMenuSubfolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\LizardByte\Sunshine" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+                    <RegistryValue Root="HKCU" Key="Software\Shiv Digital Studio\SDStudio Server" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
                 </Component>
                 <Component Id="DocumentationShortcut" Guid="*">
                     <util:InternetShortcut Id="DocumentationLink"
-                                           Name="Sunshine Documentation"
-                                           Target="https://docs.lizardbyte.dev/projects/sunshine"
+                                           Name="SDStudio Server GitHub"
+                                           Target="https://github.com/Haveli-Wale/SDStudio-Server"
                                            Type="url"/>
                     <RemoveFolder Id="CleanUpDocsShortCut" Directory="ProgramMenuSunshineFolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\LizardByte\Sunshine" Name="docs_shortcut" Type="integer" Value="1" KeyPath="yes"/>
+                    <RegistryValue Root="HKCU" Key="Software\Shiv Digital Studio\SDStudio Server" Name="docs_shortcut" Type="integer" Value="1" KeyPath="yes"/>
                 </Component>
                 <Component Id="WebsiteShortcut" Guid="*">
                     <util:InternetShortcut Id="WebsiteLink"
-                                           Name="LizardByte Web Site"
-                                           Target="https://app.lizardbyte.dev"
+                                           Name="Shiv Digital Studio GitHub"
+                                           Target="https://github.com/Haveli-Wale/SDStudio-Server"
                                            Type="url"/>
                     <RemoveFolder Id="CleanUpWebsiteShortCut" Directory="ProgramMenuSunshineFolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\LizardByte\Sunshine" Name="website_shortcut" Type="integer" Value="1" KeyPath="yes"/>
+                    <RegistryValue Root="HKCU" Key="Software\Shiv Digital Studio\SDStudio Server" Name="website_shortcut" Type="integer" Value="1" KeyPath="yes"/>
                 </Component>
                 <Component Id="SupportShortcut" Guid="*">
                     <util:InternetShortcut Id="SupportLink"
-                                           Name="LizardByte Support"
-                                           Target="https://app.lizardbyte.dev/support"
+                                           Name="SDStudio Server Support"
+                                           Target="https://github.com/Haveli-Wale/SDStudio-Server/issues"
                                            Type="url"/>
                     <RemoveFolder Id="CleanUpSupportShortCut" Directory="ProgramMenuSunshineFolder" On="uninstall"/>
-                    <RegistryValue Root="HKCU" Key="Software\LizardByte\Sunshine" Name="support_shortcut" Type="integer" Value="1" KeyPath="yes"/>
+                    <RegistryValue Root="HKCU" Key="Software\Shiv Digital Studio\SDStudio Server" Name="support_shortcut" Type="integer" Value="1" KeyPath="yes"/>
                 </Component>
             </Directory>
         </Directory>
@@ -72,7 +72,7 @@
     </InstallExecuteSequence>
 
     <!-- We need this in order to actually run our custom actions, but let's hide it -->
-    <Feature Id="RunSunshineInstallScripts" Title="Run Sunshine Installation Scripts" Level="1" Display="hidden">
+    <Feature Id="RunSunshineInstallScripts" Title="Run SDStudio Server Installation Scripts" Level="1" Display="hidden">
        <ComponentRef Id="ApplicationShortcutRoot" />
        <ComponentRef Id="ApplicationShortcut" />
        <ComponentRef Id="DocumentationShortcut" />

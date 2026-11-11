@@ -1,4 +1,12 @@
 # windows specific packaging
+# Shiv Digital Studio product metadata. The CMake target remains "sunshine" internally.
+set(CPACK_PACKAGE_NAME "SDStudio Server")
+set(CPACK_PACKAGE_VENDOR "Shiv Digital Studio")
+set(CPACK_PACKAGE_FILE_NAME "SDStudio Server Setup")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "SDStudio Server")
+set(CPACK_PACKAGE_CONTACT "https://github.com/Haveli-Wale/SDStudio-Server/issues")
+set(CPACK_PACKAGE_DESCRIPTION "Shiv Digital Studio Desktop Server")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://github.com/Haveli-Wale/SDStudio-Server")
 install(TARGETS sunshine RUNTIME DESTINATION "." COMPONENT application)
 
 # Hardening: include zlib1.dll (loaded via LoadLibrary() in openssl's libcrypto.a)
