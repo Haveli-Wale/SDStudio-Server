@@ -205,8 +205,8 @@ jobs:
           # Do not use this environment variable name.
           MATRIX_MSYSTEM: ${{ matrix.msystem }}
           BRANCH: ${{ github.head_ref || github.ref_name }}
-          BUILD_VERSION: ${{ inputs.release_version }}
-          COMMIT: ${{ inputs.release_commit }}
+          BUILD_VERSION: ${{ inputs.release_version || '0.0.0-dev' }}
+          COMMIT: ${{ inputs.release_commit || github.sha }}
         run: |
           # setup NodeJS PATH
           NODEJS_PATH=$(cygpath "$NODEJS_PATH")
@@ -220,9 +220,9 @@ jobs:
             -DBUILD_WERROR=ON \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DSUNSHINE_ASSETS_DIR=assets \
-            -DSUNSHINE_PUBLISHER_NAME="LizardByte" \
-            -DSUNSHINE_PUBLISHER_WEBSITE="https://app.lizardbyte.dev" \
-            -DSUNSHINE_PUBLISHER_ISSUE_URL="https://app.lizardbyte.dev/support"
+            -DSUNSHINE_PUBLISHER_NAME="Shiv Digital Studio" \
+            -DSUNSHINE_PUBLISHER_WEBSITE="https://github.com/Haveli-Wale/SDStudio-Server" \
+            -DSUNSHINE_PUBLISHER_ISSUE_URL="https://github.com/Haveli-Wale/SDStudio-Server/issues"
           echo "::add-matcher::.github/matchers/gcc.json"
           ninja -C build
           echo "::remove-matcher owner=gcc::"
@@ -233,7 +233,7 @@ jobs:
           set -euo pipefail
 
           binaries=(
-            build/sunshine.exe
+            "build/SDStudio Server.exe"
             build/tools/audio-info.exe
             build/tools/dxgi-info.exe
             build/tools/sunshinesvc.exe
@@ -282,7 +282,7 @@ jobs:
           certificate-profile-name: ${{ inputs.azure_signing_cert_profile }}
           endpoint: ${{ inputs.azure_signing_endpoint }}
           files: |
-            ${{ github.workspace }}/build/sunshine.exe
+            ${{ github.workspace }}/build/SDStudio Server.exe
             ${{ github.workspace }}/build/tools/audio-info.exe
             ${{ github.workspace }}/build/tools/dxgi-info.exe
             ${{ github.workspace }}/build/tools/sunshinesvc.exe
@@ -293,17 +293,26 @@ jobs:
 
       - name: Package Windows
         shell: msys2 {0}
+        env:
+          MATRIX_MSYSTEM: ${{ matrix.msystem }}
         run: |
+          set -euo pipefail
           mkdir -p artifacts
           cd build
 
-          # package
+          # Build the MSI and portable ZIP for both Windows architectures.
           cpack -G WIX
           cpack -G ZIP
 
-          # move
-          mv ./cpack_artifacts/Sunshine.msi ../artifacts/Sunshine-${{ matrix.name }}-installer.msi
-          mv ./cpack_artifacts/Sunshine.zip ../artifacts/Sunshine-${{ matrix.name }}-lite.zip
+          # Preserve architecture-specific names for release artifacts.
+          mv "./cpack_artifacts/SDStudio Server Setup.msi" "../artifacts/SDStudio-Server-${{ matrix.name }}-installer.msi"
+          mv "./cpack_artifacts/SDStudio Server Setup.zip" "../artifacts/SDStudio-Server-${{ matrix.name }}-portable.zip"
+
+          # NSIS is installed only in the UCRT64 (Windows AMD64) environment.
+          if [[ "${MATRIX_MSYSTEM}" == "ucrt64" ]]; then
+            cpack -G NSIS
+            mv "./cpack_artifacts/SDStudio Server Setup.exe" "../artifacts/SDStudio Server Setup.exe"
+          fi
 
       - name: Sign Windows installers
         # ARM64 is not currently supported, see https://github.com/Azure/artifact-signing-action/issues/92
@@ -396,7 +405,7 @@ jobs:
           7z -r `
             "-xr!CMakeFiles" `
             "-xr!cpack_artifacts" `
-            a "../artifacts/Sunshine-${{ matrix.name }}-debuginfo.7z" "*.dbg"
+            a "../artifacts/SDStudio-Server-${{ matrix.name }}-debuginfo.7z" "*.dbg"
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2

@@ -1,0 +1,20 @@
+name: SDStudio Windows Build
+
+on:
+  push:
+    branches:
+      - sdstudio-branding
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    name: Build SDStudio Windows packages
+    permissions:
+      contents: read
+    uses: ./.github/workflows/ci-windows.yml
+    with:
+      publish_release: ${{ 'false' }}
+      release_commit: ${{ github.sha }}
+      release_version: '0.0.0-dev'
